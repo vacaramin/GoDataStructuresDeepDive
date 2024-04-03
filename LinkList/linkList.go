@@ -14,6 +14,12 @@ type LinkList struct {
 	head *Node
 }
 
+func (l *LinkList) NewLinkList(val int) *Node {
+	newNode := Node{val: val, Next: nil}
+	l.head = &newNode
+	return l.head
+}
+
 func (l *LinkList) Add(val int) {
 	newNode := Node{val: val, Next: nil}
 	if l.head != nil {
