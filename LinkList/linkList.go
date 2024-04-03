@@ -1,4 +1,4 @@
-package linklist
+package linkList
 
 import (
 	"errors"
@@ -33,6 +33,34 @@ func (l *LinkList) Add(val int) {
 	}
 
 }
+func (l *LinkList) Reverse() {
+	l.head = reverseList(l.head)
+}
+
+func (l *LinkList) Get(index int) (int, error) {
+
+	temp := l.head
+	for i := 0; i < index; i++ {
+		if temp == nil {
+			return -50, errors.New("index out of range")
+		}
+		temp = temp.Next
+	}
+	return temp.val, nil
+}
+
+func reverseList(head *Node) *Node {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	newHead := reverseList(head.Next)
+
+	head.Next.Next = head
+	head.Next = nil
+
+	return newHead
+}
+
 func (l *LinkList) Remove(val int) error {
 	if l.head == nil {
 		return errors.New("can't remove, the linked list is empty")
@@ -56,7 +84,8 @@ func (l *LinkList) Remove(val int) error {
 		return errors.New("the list is empty can't remove the element")
 	}
 }
-func (l *LinkList) Print(val int) {
+
+func (l *LinkList) Print() {
 	fmt.Print("[ ")
 	if l.head != nil {
 		temp := l.head
@@ -64,8 +93,7 @@ func (l *LinkList) Print(val int) {
 			fmt.Print(temp.val, ", ")
 			temp = temp.Next
 		}
-
+		fmt.Print(temp.val)
 	}
-	fmt.Print(" ]")
-
+	fmt.Print(" ]\n")
 }
