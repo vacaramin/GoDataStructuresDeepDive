@@ -1,5 +1,7 @@
 package stack
 
+import "errors"
+
 type Node struct {
 	Value int
 	Next  *Node
@@ -23,7 +25,7 @@ func (s *Stack) Push(val int) {
 
 func (s *Stack) Pop() (int, error) {
 	if s.Head == nil {
-		return -50, nil
+		return -50, errors.New("Stack is empty")
 	}
 	val := s.Head.Value
 	s.Head = s.Head.Next
@@ -32,7 +34,7 @@ func (s *Stack) Pop() (int, error) {
 
 func (s *Stack) Peek() (int, error) {
 	if s.Head == nil {
-		return -50, nil
+		return -50, errors.New("Stack is empty")
 	}
 	return s.Head.Value, nil
 }
